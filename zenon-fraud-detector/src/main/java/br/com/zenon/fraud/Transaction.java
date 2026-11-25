@@ -15,4 +15,11 @@ public record Transaction(
     public enum Type {
         CASH_IN, CASH_OUT, DEBIT, PAYMENT, TRANSFER
     }
+    
+    public static Boolean parseFlag(String rawValue) {
+        if (rawValue == null || rawValue.isBlank()) {
+            return null;
+        }
+        return "1".equals(rawValue.trim());
+    }
 }

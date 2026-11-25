@@ -1,20 +1,20 @@
 package br.com.zenon;
 
 
-import br.com.zenon.fraud.Customer;
 import br.com.zenon.fraud.Transaction;
+import br.com.zenon.fraud.io.TransactionIngestor;
 
-import java.math.BigDecimal;
+import java.io.IOException;
 import java.util.List;
 
 public class Main {
     
-    public static void main ( String[] args ) {
-        Transaction tx1 = new Transaction(1, Transaction.Type.PAYMENT, new BigDecimal("9839.64"), new Customer("C1231006815", new BigDecimal("170136.0"), new BigDecimal("160296.36")), new Customer("M1979787155", new BigDecimal("0.0"), new BigDecimal("0.0")), false, false);
+    public static void main ( String[] args ) throws IOException {
+        String fileName = "PS_20174392719_1491204439457_log.csv";
         
-        Transaction tx2 = new Transaction(743, Transaction.Type.CASH_OUT, new BigDecimal("850002.52"), new Customer("C1280323807", new BigDecimal("850002.52"), new BigDecimal("0.0")), new Customer("C873221189", new BigDecimal("6510099.11"), new BigDecimal("7360101.63")), true, false);
+        TransactionIngestor ingestor = new TransactionIngestor();
+        List<Transaction> transactions = ingestor.ingest(fileName);
         
-        List<Transaction> transactions = List.of(tx1, tx2);
-        transactions.forEach(System.out::println);
+        transactions.stream().limit(10).forEach(System.out::println);
     }
 }
