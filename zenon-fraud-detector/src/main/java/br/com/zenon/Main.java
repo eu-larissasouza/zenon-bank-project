@@ -10,11 +10,12 @@ import java.util.List;
 public class Main {
     
     public static void main ( String[] args ) throws IOException {
-        String fileName = "PS_20174392719_1491204439457_log.csv";
-        
+        String fileName = "paysim_with_bad_data.csv";
+
         TransactionIngestor ingestor = new TransactionIngestor();
         List<Transaction> transactions = ingestor.ingest(fileName);
-        
-        transactions.stream().limit(10).forEach(System.out::println);
+
+        System.out.println(transactions.size());
+        transactions.forEach(System.out::println);
     }
 }
